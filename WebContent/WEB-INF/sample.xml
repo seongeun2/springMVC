@@ -19,6 +19,31 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 <bean id="memberService" class="chap07.member.MemberService" />
 
+<bean class="chap07.member.RegistrationController">
+	<property name="memberService" ref="memberService" />
+</bean>
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basenames">
+		<list>
+			<value>message.error</value>
+		</list>
+	</property>
+	<property name="defaultEncoding" value="UTF-8"></property>
+</bean>
+<bean class="chap07.file.FileController" />
+<bean class="chap07.file.SearchController" />
+
+<bean class="chap07.auth.LoginController">
+	<property name="authenticator" ref="authenticator" />
+</bean>
+<bean id="authenticator" class="chap07.auth.Authenticator">
+ 	<constructor-arg ref="memberService" />
+</bean>
+ 
+
+<bean class="chap07.auth.LogoutController" />
+
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="prefix" value="/WEB-INF/view/" />
 	<property name="suffix" value=".jsp" />
