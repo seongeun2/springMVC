@@ -41,6 +41,26 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
  	<constructor-arg ref="memberService" />
 </bean>
  
+ <bean id="aclService" class="chap07.ac.AclService" />
+ <bean class="chap07.ac.ACLController">
+	<property name="aclService" ref="aclService" />
+</bean>
+
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/acl/**"/><!-- acl 아래 클릭시 로그인 해야 사용가능 -->
+		<mvc:mapping path="/event/**"/><!-- event 아래 클릭시 로그인 해야 사용가능 -->
+		<bean class="chap07.common.AuthInterceptor" />	<!-- 로그인 여부 -->
+	</mvc:interceptor>
+	<bean class="chap07.common.MeasuringInterceptor" />	<!-- 시간체크 -->
+	
+	<mvc:interceptor>
+		<mvc:mapping path="/acl/**"/>
+		<ref bean="commonModelInterceptor" />
+	</mvc:interceptor>
+	
+</mvc:interceptors>
+<bean id="commonModelInterceptor" class="chap07.common.CommonModelInterceptor" />
 
 <bean class="chap07.auth.LogoutController" />
 

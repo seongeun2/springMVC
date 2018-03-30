@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>회원 가입</title>
+<title>Insert title here</title>
 </head>
 <body>
-${memberInfo.name} 님의 회원 가입을 완료했습니다.
-<button><a href="/springMVC/index">리스트</a></button>
+
 </body>
 </html>
